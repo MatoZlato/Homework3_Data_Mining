@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import transformers
 from transformers import pipeline
 import plotly.express as px
 from wordcloud import WordCloud
@@ -73,3 +74,4 @@ elif choice == "Reviews":
         st.pyplot(fig_wc)
     else:
         st.warning("Ni podatkov za ta mesec.")
+
