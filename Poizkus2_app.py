@@ -1,17 +1,16 @@
 import streamlit as st
 import pandas as pd
-import transformers
-from transformers import pipeline
+from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
 import plotly.express as px
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Brand Reputation Monitor", layout="wide")
 
-# Nujno za stabilnost na Renderju (512MB RAM)
 @st.cache_resource
 def load_sentiment_model():
-    return pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
+    from transformers import pipeline # Uvoz samo znotraj funkcije prihrani RAM ob zagonu
+    return pipeline("sentiment-analysis", model="pysentimiento/robertuito-sentiment-analysis")
 
 # Nalaganje podatkov
 @st.cache_data
@@ -74,4 +73,5 @@ elif choice == "Reviews":
         st.pyplot(fig_wc)
     else:
         st.warning("Ni podatkov za ta mesec.")
+
 
